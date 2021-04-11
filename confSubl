@@ -1,0 +1,48 @@
+
+
+Configurar Sublime Text
+
+ctrl + shift + p 
+
+Package Control: install package
+
+Se abrira otra barra donde escribes estos atajos (si copias y no aparecen, escríbelos), das enter y los instala (izquierda abajo te muestra % de instalación)
+
+Emmet --> Atajos de código Html, etiquetas
+
+Ejs: Al empezar un .html pon ! + tabulador
+	 div>.Container*5>img.imgBox + tab
+	 Lorem + tab --> Te genera un texto random
+
+Auto​File​Name --> Te muestra las rutas de los archivos segun la ruta
+
+Por ej const { app } = require('./')
+	   import Contador from '../src/'
+	   En un href (<a href=""></a>)
+
+HTML Minifier --> Te crea un archivo minificado(.min) del actual.
+ctrl + mayus + m
+
+Console Wrap --> Te permite sacar un console.log de un objeto Js seleccionado (Donde tengas el click).
+ctrl + shift + q
+
+JsFormat-master --> Identa código Javascript
+ctrl + alt + f
+
+Java​Script & Node​JS Snippets --> Autocompleta código Javascript
+Ej: cl --> console.log(obj)
+
+
+Opcionales
+
+Monokai Dark --> Para tema negro
+
+FileIcons --> Visualiza los íconos según extensión en el panel de sublime
+
+Babel --> ES6+ JavaScript con React JSX syntax 
+
+Si quieres que abra un archivo siempre con esta síntaxis 
+View --> Syntax --> Open all with.. --> Babel --> Js Babel
+
+Sublime ES7 React/Redux/React-Native/JS snippets
+Ej: Escribe useState y te saldría const [state, setState] = useState(initialState)

@@ -1,0 +1,22 @@
+
+    .title {
+      margin: 13px 0
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 14px;
+      line-height: 21px
+    }
+
+    /* Scroll */
+    body::-webkit-scrollbar {
+      display: none;
+    }
+    body {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    .github {
+      padding: 10px
+    }

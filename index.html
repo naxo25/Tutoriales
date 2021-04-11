@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="./public/ico.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> My reactive state vars </title>
+  <link href="./css/materialIcons.css" rel="stylesheet" type="text/css">
+  <link href="./css/quasar.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+
+  <div id="app">
+    <q-layout view="hHh lpR fFf">
+
+      <q-header elevated reveal bordered class="bg-black text-white" height-hint="98">
+        <q-toolbar>
+          <q-btn  icon="menu" @click="toggleLeftDrawer" />
+          <q-toolbar-title>
+            <q-avatar>
+              <q-img src="public/ico.png" >
+            </q-avatar>
+            Tutoriales
+          </q-toolbar-title>
+        </q-toolbar>
+
+        <q-tabs align="left" class='hidden'>
+          <q-route-tab to="/" label="Page One" />
+        </q-tabs>
+      </q-header>
+
+      <q-drawer show-if-above v-model="leftDrawerOpen" side="left" behavior="desktop" bordered>
+        <!-- drawer content -->
+        <q-list>
+          <q-item-label header>Nax Tutoriales</q-item-label>
+
+          <div v-for='link in state.links'>
+            <q-item :to="link.to" onclick='myRender()'>
+              <!-- <router-link :to="link.to"> {{ link.name }} </router-link> -->
+              <q-item-section avatar>
+                <q-icon name="school" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label class='text-caption'>{{ link.name }}</q-item-label>
+                <q-item-label caption>{{link.desc}}</q-item-label>
+              </q-item-section>
+            </q-item>
+            <!-- <q-item clickable tag="a" target="_blank" rel="noopener" @click='changeTab(link.to)'> -->
+            <!-- <router-link :to="link.to"> {{ link.name }} </router-link> -->
+          </div>
+
+          <q-item clickable tag="a" rel="noopener" href="http://next.quasar.dev">
+            <q-item-section avatar>
+              <q-icon name="school" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class='text-caption'>Docs</q-item-label>
+              <q-item-label caption>https://quasar.dev</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable tag="a" rel="noopener" href="https://nacholabraweb.000webhostapp.com/">
+            <q-item-section avatar>
+              <q-icon name="web" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class='text-caption'>NxWeb</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable tag="a" rel="noopener" href="https://www.youtube.com/channel/UClJr019QbaWJy3klKDOenXQ">
+            <q-item-section avatar>
+              <q-icon name="web" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class='text-caption'>YouTube</q-item-label>
+            </q-item-section>
+          </q-item>
+
+        </q-list>
+      </q-drawer>
+
+      <q-page-container>
+        <div style='position: fixed; right: 0px; padding: 10px; z-index: 10;'>
+          <q-btn class='text-black' flat icon='crop_free' @click='actions.maximizar'></q-btn>
+        </div>
+        <div class="q-pa-md">
+          <router-view />
+        </div>
+      </q-page-container>
+
+    </q-layout>
+  </div>
+
+    <!-- <script src="https://unpkg.com/vue@3"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.0.0-beta.7/dist/quasar.umd.min.js"></script>
+    <script src="https://unpkg.com/vue-router@4"></script>
+    <script src="./js/RenderJs.js"></script>
+    <script src="./js/templates.js"></script>
+    <script src="./js/store.js"></script>
+    <script src="./js/miJs.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js'></script>
+</body>
+</html>

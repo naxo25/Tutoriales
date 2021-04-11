@@ -1,0 +1,82 @@
+Opcionales
+gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig --> Verificar las firmas
+ip link -> ver si la interfaz de red esta activada
+ping archlinux.org
+timedatectl set-ntp true --> actualizar el reloj del sistema
+
+loadkeys es --> poner teclado temporal en idioma español
+
+Instalación
+Particionar el disco
+fdisk -l --> para ver como se llama nuestro disco, ej: sda
+fdisk /dev/sda
+m, o --> Crear tabla de particiones
+n, p, 1, , +10g
+n, e, 2 -->
+n, , +8g --> resto
+n, , , --> swap 
+t, 6, L, 82 --> escoger swap
+a, 1 --> escoger boot
+p --> para ver los cambios
+w --> guardar, ASEGURATE HACERLO BIEN
+
+Dar formato a las particiones
+mkswap /dev/sda6; swapon --> activar swap
+mkfs.ext4 /dev/sda1
+mkfs.ext4 /dev/sda5
+
+Montar las particiones
+mount /dev/sda1 /mnt
+mkdir /mnt/home
+mount /dev/sda5 /mnt/home
+
+Instalar base de linux, su firmware, editor nano, packetes de internet, gestores de ventanas, y muchas configuraciones más.
+pacstrap /mnt base base-devel grub os-prober ntfs-3g networkmanager gvfs gvfs-afc gvfs-mtp xdg-user-dirs linux linux-firmware nano dhcpd netctl wpa_supplicant dialog
+genfstab -U /mnt >> /mnt/etc/fstab --> Genere un archivo fstab
+cat /mnt/etc/fstab --> para ver si lo genero
+arch-chroot /mnt --> Acceder al sistema que creamos
+
+echo namePc > /etc/hostname
+ls /usr/share/zoneinfo/ --> Ve que regiones hay y elige la cercana
+ln -sf /usr/share/zoneinfo/Chile/Continental /etc/localtime --> En mi caso
+nano /etc/locale.gen --> quitar # a tu idioma
+echo LANG=es_ES.UTF8 > /etc/locale.conf
+locale-gen --> Genere el archivo local del sistema
+echo KEYMAP=es > /etc/vconsole.conf
+grub-install /dev/sda --> instalar en sda (disco y no mnt)
+grub-mkconfig -o /boot/grub/grub.cfg --> Actualizar la conf de grub
+
+passwd --> Contraseña root
+groupadd tuName
+useradd -m -g tuName -s /bin/bash tuName 
+passwd tuName 
+exit
+umount -R /mnt
+reboot now
+
+Boot system actual --> arch linux
+Ingresa como root
+nano /etc/sudoers --> al final pon tuName ALL=(ALL) NOPASSWD:ALL
+
+Ver si hay internet
+systemctl enable NetworkManager.service
+systemctl start NetworkManager.service
+ip link
+
+exit y logeamos con nuestro usuario creado (tuName)
+sudo pacman -Syyu --> Actualizamos el sistema
+
+sudo pacman -S xorg-server xorg-xinit --> servidor del entorno
+sudo pacman -S mesa mesa-demos
+sudo pacman -S xfce4-goodies network-manager-applet
+
+nano /home/tuName/.xinitrc --> configurar inicio manual
+exec startxfce4 en nano
+sudo pacman -S lxdm --> Gestor de inicio de sesión
+sudo systemctl enable lxdm
+
+Reiniciar la maquina (como es el paso final conviene más reiniciar directamente aunque se puede con comando)
+
+PostInstall
+
+https://denovatoanovato.net/que-hacer-despues-de-instalar-archlinux
